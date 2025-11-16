@@ -17,7 +17,7 @@ int main()
 
 		if (lettre == '?')
 		{
-			std::cout << "? : help \na : add a product \nl : list of all product \ns : search \nd : delete \n";
+			std::cout << "? : help \na : add a product \nl : list of all product \ns : search \nd : delete \nf : filters\n";
 		}
 
 		else if (lettre == 'a')
@@ -68,6 +68,45 @@ int main()
 
 			else
 				Produit.del(pN, std::stoi(nbt));
+		}
+
+		else if (lettre == 'f')
+		{
+			std::string oU;//over or under
+
+			std::cout << "you want all products over or under the price :";
+			std::cin >> oU;
+
+			int price;
+			
+			std::cout << "price : ";
+			std::cin >> price;
+
+			if (oU == "over")
+			{
+				int i = 0;
+
+				while (i <= Produit.getNBP())
+				{
+					if (Produit.getprice(i) >= price)
+					{
+						std::cout << Produit.getProductName(i) << " " << Produit.getprice(i);
+					}
+				}
+			}
+
+			else if (oU == "under")
+			{
+				int i = 0;
+
+				while (i <= Produit.getNBP())
+				{
+					if (Produit.getprice(i) <= price)
+					{
+						std::cout << Produit.getProductName(i) << " " << Produit.getprice(i);
+					}
+				}
+			}
 		}
 	}
 }
