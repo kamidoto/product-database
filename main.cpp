@@ -1,26 +1,122 @@
+#include "produit.h"
 #include <iostream>
-#include <string>
-#include <vector>
-#include "dDE.h"
-
-std::string fonction;
+#include <stdlib.h>
 
 int main()
 {
-    while (true == true)
-    {
+	produit Produit;
+	
+	Produit.init();
 
-        std::getline(std::cin, fonction);
+	char lettre;
 
-        if (fonction == "help")
-        {
+	while (true == true)
+	{
+		std::cin >> lettre;
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-        }
+		if (lettre == '?')
+		{
+			std::cout << "? : help \na : add a product \nl : list of all product \ns : search \nd : delete \nf : filters\n";
+		}
 
-        dE(fonction);
+		else if (lettre == 'a')
+		{
+			
+			 double price;
+			 std::string pN;//product name
 
-     //   std::cout << "double " << nb[0] << std::endl << nb[1] << std::endl;
+			 std::cout << "product name : ";
+			 std::getline(std::cin, pN);
 
-     //   std::cout << "string " << operateur[0] << std::endl;
-    }
+			 std::cout << "price : ";
+			 std::cin >> price;
+
+			 Produit.write(pN, price);
+		}
+
+		else if (lettre == 'l')
+		{
+			int i = -1;
+			while ( Produit.getNBP() > i)
+			{
+				i++;
+				std::cout << Produit.getProductName(i) << " " << Produit.getprice(i) <<" euros" << std::endl;
+			}
+		}
+
+		else if (lettre == 's')
+		{
+			std::cout << "exact name :";
+
+		}
+
+		else if (lettre == 'd')
+		{
+			std::string pN;
+
+			std::cout << "product to delete : ";
+			std::getline(std::cin, pN);
+
+			std::string nbt; //nb de fois
+
+			std::cout << "how much time ? if you whant to delte all the products with this name tap all : ";
+			std::cin >> nbt;
+
+			if (nbt == "all")
+				Produit.del(pN);
+
+			else
+				Produit.del(pN, std::stoi(nbt));
+		}
+
+		else if (lettre == 'f')
+		{
+			std::string oU;//over or under
+
+			std::cout << "you want all products over or under the price :";
+			std::cin >> oU;
+
+			int price;
+			
+			std::cout << "price : ";
+			std::cin >> price;
+
+			if (oU == "over")
+			{
+				int i = 0;
+
+				while (i <= Produit.getNBP())
+				{
+					if (Produit.getprice(i) >= price)
+					{
+						std::cout << Produit.getProductName(i) << " " << Produit.getprice(i);
+
+                                                i++;
+					}
+                                         
+                                        else
+                                          i++;
+				}
+			}
+
+			else if (oU == "under")
+			{
+				int i = 0;
+
+				while (i <= Produit.getNBP())
+				{
+					if (Produit.getprice(i) <= price)
+					{
+						std::cout << Produit.getProductName(i) << " " << Produit.getprice(i);
+
+                                                i++;
+					}
+                                        
+                                        else
+                                          i++;
+				}
+			}
+		}
+	}
 }

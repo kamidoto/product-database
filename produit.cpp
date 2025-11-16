@@ -53,7 +53,7 @@ void produit::write(std::string productname, double price)
 
 std::string produit::getProductName(int nDebug)
 {
-	if (Produit.size() >= nDebug)
+	if (Produit.size() > nDebug)
 		return Produit[nDebug];
 
 	else
@@ -62,7 +62,7 @@ std::string produit::getProductName(int nDebug)
 
 double produit::getprice(int nDebug)
 {
-	if (Prix.size() >= nDebug)
+	if (Prix.size() > nDebug)
 		return Prix[nDebug];
 
 	else
@@ -151,7 +151,7 @@ void produit::del(std::string productName, int nBOfTime)
 {
 	int i = 0;
 	int time = 0;
-	while (i < Produit.size() and time<=nBOfTime)
+	while (i < Produit.size() and time < nBOfTime)
 	{
 		if (Produit[i] == productName)
 		{
